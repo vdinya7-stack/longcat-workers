@@ -1,0 +1,12 @@
+{
+  "title": "LongCat Video",
+  "description": "Image-to-video generation using LongCat Video 13.6B model",
+  "type": "serverless",
+  "category": "video",
+  "iconUrl": "https://huggingface.co/meituan-longcat/LongCat-Video/resolve/main/assets/logo.png",
+  "config": {
+    "runsOn": "GPU",
+    "containerDiskInGb": 20,
+    "presets": []
+  }
+}
