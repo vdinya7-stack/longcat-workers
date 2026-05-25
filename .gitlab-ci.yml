@@ -1,0 +1,31 @@
+stages:
+  - build
+
+variables:
+  REGISTRY: docker.io
+  IMAGE_VIDEO: $CI_REGISTRY_USER/longcat-video
+  IMAGE_AVATAR: $CI_REGISTRY_USER/longcat-avatar
+
+build-video:
+  stage: build
+  image: docker:24
+  services:
+    - docker:24-dind
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
+    - docker build -t $IMAGE_VIDEO:latest ./longcat-video
+    - docker push $IMAGE_VIDEO:latest
+  only:
+    - main
+
+build-avatar:
+  stage: build
+  image: docker:24
+  services:
+    - docker:24-dind
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
+    - docker build -t $IMAGE_AVATAR:latest ./longcat-avatar
+    - docker push $IMAGE_AVATAR:latest
+  only:
+    - main
