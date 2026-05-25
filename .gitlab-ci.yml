@@ -6,6 +6,12 @@ variables:
   IMAGE_VIDEO: $CI_REGISTRY_USER/longcat-video
   IMAGE_AVATAR: $CI_REGISTRY_USER/longcat-avatar
 
+# Применяется к обоим job: освобождает место от накопленных слоёв (полезно на
+# self-hosted/персистентных раннерах) и печатает доступное место для диагностики.
+before_script:
+  - docker system prune -af --volumes
+  - df -h
+
 build-video:
   stage: build
   image: docker:24
@@ -13,7 +19,7 @@ build-video:
     - docker:24-dind
   script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
-    - docker build -t $IMAGE_VIDEO:latest ./longcat-video
+    - docker build --no-cache -t $IMAGE_VIDEO:latest ./longcat-video
     - docker push $IMAGE_VIDEO:latest
   only:
     - main
@@ -25,7 +31,7 @@ build-avatar:
     - docker:24-dind
   script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
-    - docker build -t $IMAGE_AVATAR:latest ./longcat-avatar
+    - docker build --no-cache -t $IMAGE_AVATAR:latest ./longcat-avatar
     - docker push $IMAGE_AVATAR:latest
   only:
     - main
