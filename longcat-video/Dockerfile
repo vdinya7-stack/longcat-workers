@@ -1,4 +1,4 @@
-FROM runpod/pytorch:2.4.0-py3.11-cuda12.4.1-devel-ubuntu22.04
+FROM runpod/pytorch:2.4.0-py3.11-cuda12.4.1-runtime-ubuntu22.04
 
 ENV DEBIAN_FRONTEND=noninteractive \
     PIP_NO_CACHE_DIR=1 \
@@ -21,12 +21,12 @@ RUN pip install --no-cache-dir -r LongCat-Video/requirements.txt
 COPY requirements.txt /app/requirements.txt
 RUN pip install --no-cache-dir -r /app/requirements.txt
 
-# FlashAttention-2 собирается из исходников и прожорлив по памяти.
-# ninja ускоряет сборку, MAX_JOBS ограничивает параллелизм, чтобы не словить OOM
-# на CI-раннере (docker-in-docker).
-ENV MAX_JOBS=4
-RUN pip install --no-cache-dir packaging ninja wheel
-RUN pip install --no-cache-dir flash-attn --no-build-isolation
+# FlashAttention-2 ставим из официального ПРЕДСОБРАННОГО wheel.
+# runtime-образ не содержит nvcc, поэтому сборка из исходников невозможна;
+# wheel под torch2.4 / cu12x / cp311 (ABI=FALSE, как у pip-сборок torch) не
+# требует ни компилятора, ни nvcc и держит образ компактным.
+RUN pip install --no-cache-dir \
+    https://github.com/Dao-AILab/flash-attention/releases/download/v2.6.3/flash_attn-2.6.3+cu123torch2.4cxx11abiFALSE-cp311-cp311-linux_x86_64.whl
 
 COPY handler.py /app/handler.py
 
