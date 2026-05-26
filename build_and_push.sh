@@ -14,4 +14,8 @@ echo "=== Building longcat-avatar ==="
 docker build -t $DOCKER_USER/longcat-avatar:latest ./longcat-avatar
 docker push $DOCKER_USER/longcat-avatar:latest
 
+echo "=== Building ltx-video ==="
+docker build -t $DOCKER_USER/ltx-video:latest ./ltx-video
+docker push $DOCKER_USER/ltx-video:latest
+
 echo "=== Done ==="
