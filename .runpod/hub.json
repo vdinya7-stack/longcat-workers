@@ -1,12 +1,12 @@
 {
-  "title": "LongCat Video",
-  "description": "Image-to-video generation using LongCat Video 13.6B model",
+  "title": "LTX-2.3 Video",
+  "description": "Image-to-video generation using Lightricks LTX-2.3 (22B) model",
   "type": "serverless",
   "category": "video",
-  "iconUrl": "https://huggingface.co/meituan-longcat/LongCat-Video/resolve/main/assets/logo.png",
+  "iconUrl": "https://huggingface.co/Lightricks/LTX-Video/resolve/main/media/trailer.png",
   "config": {
     "runsOn": "GPU",
-    "containerDiskInGb": 20,
+    "containerDiskInGb": 30,
     "presets": []
   }
 }

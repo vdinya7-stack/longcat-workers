@@ -1,0 +1,13 @@
+runpod
+diffusers>=0.31.0
+transformers
+accelerate
+boto3
+requests
+torch
+# Runtime-критичные дополнения:
+sentencepiece      # токенизатор T5 у LTX
+imageio            # export_to_video
+imageio-ffmpeg     # mp4-бэкенд для export_to_video
+Pillow
+hf_transfer        # ускоряет скачивание весов с HF Hub
