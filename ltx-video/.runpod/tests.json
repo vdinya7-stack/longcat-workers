@@ -1,0 +1,14 @@
+{
+  "tests": [
+    {
+      "name": "image_to_video",
+      "input": {
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat03.jpg/1200px-Cat03.jpg",
+        "prompt": "a cat slowly turning its head, cinematic lighting",
+        "duration": 3,
+        "resolution": "480p"
+      },
+      "timeout": 600000
+    }
+  ]
+}

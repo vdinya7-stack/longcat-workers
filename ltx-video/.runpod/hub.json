@@ -1,0 +1,12 @@
+{
+  "title": "LTX-2.3 Video",
+  "description": "Image-to-video generation using Lightricks LTX-2.3 (22B) model",
+  "type": "serverless",
+  "category": "video",
+  "iconUrl": "https://huggingface.co/Lightricks/LTX-Video/resolve/main/media/trailer.png",
+  "config": {
+    "runsOn": "GPU",
+    "containerDiskInGb": 30,
+    "presets": []
+  }
+}
